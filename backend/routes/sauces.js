@@ -1,42 +1,31 @@
 const express = require('express');
 
 const router = express.Router();
+// const auth = require('../middleware/auth');
+// const multer = require('../middleware/multer-config');
 
-const Sauce = require('../models/sauces');
-
+const stuffCtrl = require('../controllers/sauces');
+const auth = require('../middleware/auth');
 //     /api/sauces yerine sadece / koy
 
-router.post('/', (req, res, next) => {
-    delete req.body._id;
-    const sauce = new Sauce({
-      ...req.body
-    });
-    sauce.save()
-      .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
-  }); 
-  router.get('/', (req, res, next) => {
-    Sauce.find()
-      .then(sauces => res.status(200).json(sauces))
-      .catch(error => res.status(400).json({ error }));
-  });
+/* router.post('/', auth, multer, stuffCtrl.createSauce);
 
-  router.get('/:id', (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
-      .then(sauces => res.status(200).json(sauces))
-      .catch(error => res.status(404).json({ error }));
-  });
+router.get('/', auth, stuffCtrl.getOneSauce);
 
-  router.put('/:id', (req, res, next) => {
-    Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-      .then(() => res.status(200).json({ message: 'Sauce modifié !'}))
-      .catch(error => res.status(400).json({ error }));
-  });
+router.get('/:id', auth, stuffCtrl.getAllSauces);
 
-  router.delete('/:id', (req, res, next) => {
-    Sauce.deleteOne({ _id: req.params.id })
-      .then(() => res.status(200).json({ message: 'Sauce supprimé !'}))
-      .catch(error => res.status(400).json({ error }));
-  });
+router.put('/:id', auth, multer, stuffCtrl.modifySauce);
 
-module.exports = router;
+router.delete('/:id', auth, stuffCtrl.deleteSauce); */
+
+router.post('/', stuffCtrl.createSauce);
+
+router.get('/', stuffCtrl.getOneSauce);
+
+router.get('/:id', stuffCtrl.getAllSauces);
+
+router.put('/:id', stuffCtrl.modifySauce);
+
+router.delete('/:id', stuffCtrl.deleteSauce);
+
+module.exports = router;  

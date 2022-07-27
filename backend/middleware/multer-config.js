@@ -1,4 +1,4 @@
-// importer multer 
+/* // importer multer 
 const multer = require('multer');
 
 const MIME_TYPES = {
@@ -24,4 +24,4 @@ const storage = multer.diskStorage({
 })
 
 // exporter le middleware multer
-module.exports = multer({storage: storage}).single('image');
+module.exports = multer({storage: storage}).single('image'); */   
