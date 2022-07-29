@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
 // recuperer le token
 try{
     // recuperer le header et splitter pour diviser le chain de caracter en un tableau
-    const token = req.headers.authorization.split('')[1];
+    const token = req.headers.authorization.split(' ')[1];
     // appeller la method verfy de json web token, on passe le token qui mous avons recupere et la clé secret
     const decodedToken = jwt.verify(token,  'RANDOM_TOKEN_SECRET');
     const userId = decodedToken.userId;

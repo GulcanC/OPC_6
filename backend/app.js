@@ -1,7 +1,7 @@
 const express = require('express'); // installation du module express qui permet de coder plus facilement et rapidement en node 
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
-// const path = require('path');
+ const path = require('path');
 
 // 🙄 after this create use.post for sauce
 
@@ -38,11 +38,10 @@ app.use(bodyParser.json());
 // Ca sera la racine de tout ce qui est route liéee a l'authentification
 // go to the routes/user.js to configure the router
 
-
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
-// app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 module.exports = app; 
