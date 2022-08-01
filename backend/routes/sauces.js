@@ -12,11 +12,11 @@ router.post('/', auth, multer, stuffCtrl.createSauce);
 
 router.get('/:id', auth, stuffCtrl.getOneSauce);
 
- router.get('/', auth, stuffCtrl.getAllSauces);
+router.get('/', auth, stuffCtrl.getAllSauces);
 
 router.put('/:id', auth, multer, stuffCtrl.modifySauce);
 
-router.delete('/:id', auth, stuffCtrl.deleteSauce); 
+router.delete('/:id', auth, stuffCtrl.deleteSauce);
 
 /* router.post('/', stuffCtrl.createSauce);
 
