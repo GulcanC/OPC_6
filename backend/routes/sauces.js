@@ -10,9 +10,9 @@ const auth = require('../middleware/auth');
 
 router.post('/', auth, multer, stuffCtrl.createSauce);
 
-router.get('/', auth, stuffCtrl.getOneSauce);
+router.get('/:id', auth, stuffCtrl.getOneSauce);
 
- router.get('/:id', auth, stuffCtrl.getAllSauces);
+ router.get('/', auth, stuffCtrl.getAllSauces);
 
 router.put('/:id', auth, multer, stuffCtrl.modifySauce);
 
