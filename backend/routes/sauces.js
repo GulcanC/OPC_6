@@ -5,6 +5,7 @@ const router = express.Router();
 const multer = require('../middleware/multer-config');
 
 const stuffCtrl = require('../controllers/sauces');
+
 const auth = require('../middleware/auth');
 //     /api/sauces yerine sadece / koy
 
@@ -18,14 +19,4 @@ router.put('/:id', auth, multer, stuffCtrl.modifySauce);
 
 router.delete('/:id', auth, stuffCtrl.deleteSauce);
 
-/* router.post('/', stuffCtrl.createSauce);
-
-router.get('/', stuffCtrl.getOneSauce);
-
-router.get('/:id', stuffCtrl.getAllSauces);
-
-router.put('/:id', stuffCtrl.modifySauce);
-
-router.delete('/:id', stuffCtrl.deleteSauce);
- */
 module.exports = router;  
