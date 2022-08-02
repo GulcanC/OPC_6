@@ -10,6 +10,7 @@ const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauces');
 
 
+
 // mongoose pour créer une interface avec bdd MongoDBm c'est créer un schéma qui nous permettre d'enregistrer, de lire, de modifier les objets.
 // go to the models/sauce.js pour importer mongoose
 mongoose.connect('mongodb+srv://GC:projet6@cluster0.wwdoaoj.mongodb.net/?retryWrites=true&w=majority'
