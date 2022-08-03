@@ -124,11 +124,10 @@ exports.likeDislike = (req, res, next) => {
 
 
       // 1) like = 1 (likes +1 ) Si like = 1, l'utilisateur aime (= like) la sauce
-      // I will search the userLiked in the object, at first it is false, userLiked does not include userId, use ! to cenvert it true
+      // I will search userId in the array userLiked, at first it is false, userLiked does not include userId, use ! to cenvert it true
       // and the request front like must be 1
       if (!objectSauce.usersLiked.includes(req.body.userId) && req.body.like === 1) {
-        console.log("true");
-
+        console.log("LIKE = 1");
         Sauce.updateOne({ _id: req.params.id },
           {
             // use the operator $inc mongoDB which increments a field by a specified value and has the following form:
@@ -142,23 +141,32 @@ exports.likeDislike = (req, res, next) => {
 
         // update the object database
       }
-      else { console.log('false'); }
-      
-      // 2) like = 0 (likes = 0), Si like = 0, l'utilisateur annule son like ou son dislike
+      else { console.log('LIKE != 1'); }
+
+      // 2) like = 0 (likes = 0), Si like = 0, l'utilisateur annule son like 
+      // If userLiked includes the userId and like is 0 
 
       if (objectSauce.usersLiked.includes(req.body.userId) && req.body.like === 0) {
+        console.log("LIKE = 0");
         Sauce.updateOne({ _id: req.params.id },
           {
-            $inc: { likes: -1 },//$inc opérateur mongoDB incrémente
-            $pull: { usersLiked: req.body.userId }  //$pull Supprime tous les éléments du tableau qui correspondent à une requête spécifiée.
+            // To obtain 0 likes should be -1, we will increase from -1
+            $inc: { likes: -1 },
+            // The $pull operator removes from an existing array all instances of a value or values that match a specified condition.
+            // If user had already liked the sauce and he/she changed it, $pull operator will remove the userId from the array usersLiked 
+            $pull: { usersLiked: req.body.userId }
           }
         )
-          .then(() => res.status(201).json({ message: "User like 0" }))
+          .then(() => res.status(201).json({ message: "User like 0, user a annulé son like!" }))
           .catch((error) => res.status(400).json({ error }));
-      };
-      // 3) like -1 (dislikes +1), Si like = -1, l'utilisateur n'aime pas (=dislike) la sauce.
+      }
+      else { console.log('LIKE != 0'); }
 
-      if (!objectSauce.usersDisliked.includes(req.body.userId) && req.body.like === -1) {// cherche dans userDisliked si l'userId est présent quand il appuie sur dislike
+      // 3) like -1 (dislikes +1), Si like = -1, l'utilisateur n'aime pas la sauce.
+      // I will search the userId in the array userDisliked in the object, at first it is false, userDisliked does not include userId, use ! to cenvert it true
+      // And when the user disliked the sauce, we will see in the console that dislikes = -1
+      if (!objectSauce.usersDisliked.includes(req.body.userId) && req.body.like === -1) {
+        console.log("DISLIKE = 1");
         Sauce.updateOne({ _id: req.params.id },
           {
             $inc: { dislikes: 1 },
@@ -167,19 +175,21 @@ exports.likeDislike = (req, res, next) => {
         )
           .then(() => res.status(201).json({ message: "User disLike +1" }))
           .catch((error) => res.status(400).json({ error }));
-      };
+      } else { console.log('DISLIKE != -1'); }
 
-      // 4) like = 0 (dislikes 0)
+
+      // 4) like = 0 (dislikes 0) If the user cancel her dislike, we will see likes = 0, and we will remove the userId from the array userDisliked
       if (objectSauce.usersDisliked.includes(req.body.userId) && req.body.like === 0) {
+        console.log("DISLIKE = 0");
         Sauce.updateOne({ _id: req.params.id },
           {
             $inc: { dislikes: -1 },
             $pull: { usersDisliked: req.body.userId }
           }
         )
-          .then(() => res.status(201).json({ message: "User disLike +1" }))
+          .then(() => res.status(201).json({ message: "User disLike 0, user a annulé son dislike!" }))
           .catch((error) => res.status(400).json({ error }));
-      };
+      } else { console.log('DISLIKE != 0'); }
     })
     .catch((error) => res.status(404).json({ error }));
 
