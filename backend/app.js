@@ -1,7 +1,11 @@
 const express = require('express'); // installation du module express qui permet de coder plus facilement et rapidement en node 
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
- const path = require('path');
+const path = require('path');
+
+// importer le package pour utiliser les variables d'environnement
+const dotenv = require('dotenv');
+const result = dotenv.config();
 
 // 🙄 after this create use.post for sauce
 
@@ -13,7 +17,8 @@ const sauceRoutes = require('./routes/sauces');
 
 // mongoose pour créer une interface avec bdd MongoDBm c'est créer un schéma qui nous permettre d'enregistrer, de lire, de modifier les objets.
 // go to the models/sauce.js pour importer mongoose
-mongoose.connect('mongodb+srv://GC:projet6@cluster0.wwdoaoj.mongodb.net/?retryWrites=true&w=majority'
+// mongoose.connect('mongodb+srv://GC:projet6@cluster0.wwdoaoj.mongodb.net/?retryWrites=true&w=majority'
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PWD}@cluster0.wwdoaoj.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   ,
   {
     useNewUrlParser: true,
@@ -32,6 +37,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); // les requêtes get post put delete patch sont acceptées
   next(); // permet de passer à la lecture des autres middlewares
 });
+
 
 app.use(bodyParser.json());
 
