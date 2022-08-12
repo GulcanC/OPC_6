@@ -101,7 +101,7 @@ exports.deleteSauce = (req, res, next) => {
       else {
         // recuperer l'URL qui est enregistrée, et recréer le chemin sur notre system du fichier
         const filename = sauce.imageUrl.split("/images/")[1];
-        // pour la suppression, importer le package fs
+        // pour la suppression, importer le package fs qui nous donne accès aux fonctions qui nous permettent de modifier le système de fichiers
         fs.unlink(`images/${filename}`, () => {
           Sauce.deleteOne({ _id: req.params.id })
             .then(() => {
@@ -119,17 +119,13 @@ exports.deleteSauce = (req, res, next) => {
   console.log(req.params.id);
 };
 
+// 1) like = 1 (likes +1 ) Si like = 1, l'utilisateur aime (= like) la sauce
 exports.likeDislike = (req, res, next) => {
-  // Search the object in the data base, use the method findOne() to find the id of the object
-
+  // chercher l'objet dans la bdd et utiliser findOne() pour trouver l'id de l'objet
   Sauce.findOne({ _id: req.params.id })
     .then((objectSauce) => {
-      // Kullanıcı beğenirse 1, beğenmezse -1, daha önce beğendiğini veya beğenmediğini geri alırsa 0 veya ne beğenir ne de beğenmezse 0.
-      // Use the method js includes(), returns true if a string contains a specified string, otherwise it returns false.
-
-      // 1) like = 1 (likes +1 ) Si like = 1, l'utilisateur aime (= like) la sauce
-      // I will search userId in the array userLiked, at first it is false, userLiked does not include userId, use ! to cenvert it true
-      // and the request front like must be 1
+      // rechercher userId dans le tableau userLiked, au début c'est faux, userLike ne contient pas userId, utiliser l'exclamation pour inverser que c'est true
+      // la requête front like doit etre 1
       if (
         !objectSauce.usersLiked.includes(req.body.userId) &&
         req.body.like === 1
@@ -138,10 +134,10 @@ exports.likeDislike = (req, res, next) => {
         Sauce.updateOne(
           { _id: req.params.id },
           {
-            // use the operator $inc mongoDB which increments a field by a specified value and has the following form:
+            // Utiliser l'opérateur $inc MongoDB qui incrémente un champ d'une valeur spécifiée
             $inc: { likes: 1 },
-            // The $push operator MangoDB appends a specified value to an array.
-            $push: { usersLiked: req.body.userId }, //$pull Supprime tous les éléments du tableau qui correspondent à une requête spécifiée.
+            // L'opérateur $push MongoDB ajoute une valeur spécifiée à un tableau.
+            $push: { usersLiked: req.body.userId },
           }
         )
           .then(() => res.status(201).json({ message: "Sauce like +1" }))
@@ -153,7 +149,7 @@ exports.likeDislike = (req, res, next) => {
       }
 
       // 2) like = 0 (likes = 0), Si like = 0, l'utilisateur annule son like
-      // If userLiked includes the userId and like is 0
+      // Si le tableau userLiked contient le userId et like est 0, l'utilisateur annule son like
 
       if (
         objectSauce.usersLiked.includes(req.body.userId) &&
@@ -165,8 +161,7 @@ exports.likeDislike = (req, res, next) => {
           {
             // To obtain 0 likes should be -1, we will increase from -1
             $inc: { likes: -1 },
-            // The $pull operator removes from an existing array all instances of a value or values that match a specified condition.
-            // If user had already liked the sauce and he/she changed it, $pull operator will remove the userId from the array usersLiked
+            // Si l'utilisateur avait déjà aimé la sauce et qu'il l'a changée, l'opérateur $pull supprimera l'userId du tableau usersLiked
             $pull: { usersLiked: req.body.userId },
           }
         )
@@ -182,7 +177,6 @@ exports.likeDislike = (req, res, next) => {
 
       // 3) like -1 (dislikes +1), Si like = -1, l'utilisateur n'aime pas la sauce.
       // I will search the userId in the array userDisliked in the object, at first it is false, userDisliked does not include userId, use ! to cenvert it true
-      // And when the user disliked the sauce, we will see in the console that dislikes = -1
       if (
         !objectSauce.usersDisliked.includes(req.body.userId) &&
         req.body.like === -1

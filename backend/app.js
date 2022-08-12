@@ -5,6 +5,8 @@ require("dotenv").config(); // cache le lien mongoose bdd
 const bodyParser = require("body-parser");
 
 const path = require("path");
+// dotenv.config({ path: "./vars/.env" });
+require("dotenv").config({ path: "./vars/.env" });
 
 // 👽 importer ./routes/user.js, ./routes/sauces.js, go to down to save routes
 const userRoutes = require("./routes/user");
