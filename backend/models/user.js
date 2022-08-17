@@ -1,5 +1,4 @@
 // 1 Importer mongoose On va stocker des documents user dans notre base de données
-
 const mongoose = require("mongoose");
 
 // 5 Les erreurs générées par défaut par MongoDB pouvant être difficiles à résoudre,

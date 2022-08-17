@@ -1,24 +1,29 @@
-const express = require('express');
+const express = require("express");
 
+// Cette fonction est utilisée lorsque vous souhaitez créer un nouvel objet routeur dans votre programme pour gérer les requêtes.
 const router = express.Router();
 
-const multer = require('../middleware/multer-config');
+const multer = require("../middleware/multer-config");
 
-const ctrlSauce = require('../controllers/sauces');
+const ctrlSauce = require("../controllers/sauces");
 
-const auth = require('../middleware/auth');
+const auth = require("../middleware/auth");
+
 //     /api/sauces yerine sadece / koy
 
-router.post('/', auth, multer, ctrlSauce.createSauce);
+// Les requêtes GET sont utilisées pour récupérer des données à partir de ressources spécifiées
+// Les requêtes POST sont utilisées pour soumettre des données à une ressource spécifiée.
 
-router.get('/:id', auth, ctrlSauce.getOneSauce);
+router.post("/", auth, multer, ctrlSauce.createSauce);
 
-router.get('/', auth, ctrlSauce.getAllSauces);
+router.get("/:id", auth, ctrlSauce.getOneSauce);
 
-router.put('/:id', auth, multer, ctrlSauce.modifySauce);
+router.get("/", auth, ctrlSauce.getAllSauces);
 
-router.delete('/:id', auth, ctrlSauce.deleteSauce);
+router.put("/:id", auth, multer, ctrlSauce.modifySauce);
+
+router.delete("/:id", auth, ctrlSauce.deleteSauce);
 
 router.post("/:id/like", auth, multer, ctrlSauce.likeDislike);
 
-module.exports = router;  
+module.exports = router;

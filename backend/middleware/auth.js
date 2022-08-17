@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     console.log("🎉🎉🎉TOKEN🎉🎉🎉");
     console.log(req.headers.authorization);
     // maintenant nous avons le token il faut le decoder
-    // utiliserc verify() pour recuperer l'id de l'utilisateur
+    // utiliser verify() pour recuperer l'id de l'utilisateur
     const decodedToken = jwt.verify(token, `${process.env.JWT_KEY_TOKEN}`);
     console.log("🎉🎉🎉decodedToken🎉🎉🎉");
     console.log(decodedToken);
@@ -22,3 +22,5 @@ module.exports = (req, res, next) => {
     res.status(401).json({ error });
   }
 };
+
+// vérifier que l’utilisateur est bien connecté et transmettre les informations de connexion aux différentes méthodes qui vont gérer les requêtes.
