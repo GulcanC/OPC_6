@@ -11,11 +11,10 @@ exports.createSauce = (req, res, next) => {
   const sauce = new Sauce({
     ...sauceObject,
     // generer l'url de l'image, il nous est donnée par multer
+    // http :// localhost:3000 /images/ nom de l'image ajouté
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
-    // http :// localhost:3000 /images/ nom de l'image ajouté
-
     likes: 0,
     dislikes: 0,
     usersLiked: [" "],
