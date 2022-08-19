@@ -1,6 +1,7 @@
 const express = require("express");
 // mongoose pour créer une interface avec bdd MongoDBm c'est créer un schéma qui nous permettre d'enregistrer, de lire, de modifier les objets.
 const mongoose = require("mongoose");
+
 require("dotenv").config({ path: "./vars/.env" });
 
 const bodyParser = require("body-parser");
@@ -22,6 +23,8 @@ mongoose
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
+console.log(process.env.DB_USERNAME);
+
 const app = express();
 
 // CORS - Permet d'accéder au front - lien entre les 2 serveurs grâce aux autorisations ci-dessous
@@ -35,7 +38,7 @@ app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  ); // // On donne l'autorisation d'utiliser certains methodes sur l'objet requête; get post put delete patch
+  ); // On donne l'autorisation d'utiliser certains methodes sur l'objet requête; get post put delete patch
   next(); // permet de passer à la lecture des autres middlewares
 });
 

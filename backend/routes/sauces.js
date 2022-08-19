@@ -3,11 +3,11 @@ const express = require("express");
 // Cette fonction est utilisée lorsque vous souhaitez créer un nouvel objet routeur dans votre programme pour gérer les requêtes.
 const router = express.Router();
 
+const auth = require("../middleware/auth");
+
 const multer = require("../middleware/multer-config");
 
 const ctrlSauce = require("../controllers/sauces");
-
-const auth = require("../middleware/auth");
 
 //     /api/sauces yerine sadece / koy
 
@@ -24,6 +24,6 @@ router.put("/:id", auth, multer, ctrlSauce.modifySauce);
 
 router.delete("/:id", auth, ctrlSauce.deleteSauce);
 
-router.post("/:id/like", auth, multer, ctrlSauce.likeDislike);
+router.post("/:id/like", auth, ctrlSauce.likeDislike);
 
 module.exports = router;
