@@ -1,8 +1,6 @@
 // 3 installer et importer bcrypt, pour hasher le password
 const bcrypt = require("bcrypt");
 
-require("dotenv").config();
-
 const User = require("../models/user");
 
 const jwt = require("jsonwebtoken");
