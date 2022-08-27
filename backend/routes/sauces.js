@@ -1,5 +1,4 @@
 const express = require("express");
-
 // Cette fonction est utilisée lorsque vous souhaitez créer un nouvel objet routeur dans votre programme pour gérer les requêtes.
 const router = express.Router();
 

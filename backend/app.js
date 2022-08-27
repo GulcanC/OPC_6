@@ -1,12 +1,12 @@
 const express = require("express");
-// mongoose pour créer une interface avec bdd MongoDBm c'est créer un schéma qui nous permettre d'enregistrer, de lire, de modifier les objets.
+// mongoose pour créer une interface avec bdd MongoDB c'est créer un schéma qui nous permettre d'enregistrer, de lire, de modifier les objets.
 const mongoose = require("mongoose");
 
-require("dotenv").config({ path: "./vars/.env" });
-
 const bodyParser = require("body-parser");
-
+// ***
 const path = require("path");
+
+require("dotenv").config({ path: "./vars/.env" });
 
 // 👽 importer ./routes/user.js, ./routes/sauces.js, go to down to save routes
 const userRoutes = require("./routes/user");
@@ -47,12 +47,12 @@ app.use(bodyParser.json());
 
 // Afin d'enregistrer les routes ici, on ajoute app.use(), ce la route attendu par le frontend
 // Ca sera la racine de tout ce qui est route liéee a l'authentification
-
 app.use("/api/sauces", sauceRoutes);
 
 app.use("/api/auth", userRoutes);
 
-// traiter les requêtes vers la route /image, en rendant notre dossier images statique
+// *** traiter les requêtes vers la route /image, en rendant notre dossier images statique.
+// dirname est le chemin absolu vers le répertoire contenant le fichier source.
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
