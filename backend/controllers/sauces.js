@@ -20,7 +20,7 @@ exports.createSauce = (req, res, next) => {
     usersLiked: [" "],
     usersdisLiked: [" "],
   });
-  // enregistrer cet objet dans la bdd
+  // enregistrer cet objet dans la bdd ***
   // aller au app.js pour ajouter une route pour gerer images
   sauce
     .save()
@@ -141,16 +141,11 @@ exports.likeDislike = (req, res, next) => {
         )
           .then(() => res.status(201).json({ message: "Sauce like +1" }))
           .catch((error) => res.status(400).json({ error }));
-
-        // update the object database
-      } else {
-        console.log("LIKE != 1");
       }
 
       // 2) like = 0 (likes = 0), Si like = 0, l'utilisateur annule son like
       // Si le tableau userLiked contient le userId et like est 0, l'utilisateur annule son like
-
-      if (
+      else if (
         objectSauce.usersLiked.includes(req.body.userId) &&
         req.body.like === 0
       ) {
@@ -170,13 +165,11 @@ exports.likeDislike = (req, res, next) => {
               .json({ message: "User like 0, user a annulé son like!" })
           )
           .catch((error) => res.status(400).json({ error }));
-      } else {
-        console.log("LIKE != 0");
       }
 
       // 3) like -1 (dislikes +1), Si like = -1, l'utilisateur n'aime pas la sauce.
       // I will search the userId in the array userDisliked in the object, at first it is false, userDisliked does not include userId, use ! to cenvert it true
-      if (
+      else if (
         !objectSauce.usersDisliked.includes(req.body.userId) &&
         req.body.like === -1
       ) {
@@ -190,12 +183,9 @@ exports.likeDislike = (req, res, next) => {
         )
           .then(() => res.status(201).json({ message: "User disLike +1" }))
           .catch((error) => res.status(400).json({ error }));
-      } else {
-        console.log("DISLIKE != -1");
       }
-
       // 4) like = 0 (dislikes 0) If the user cancel her dislike, we will see likes = 0, and we will remove the userId from the array userDisliked
-      if (
+      else if (
         objectSauce.usersDisliked.includes(req.body.userId) &&
         req.body.like === 0
       ) {
@@ -213,8 +203,6 @@ exports.likeDislike = (req, res, next) => {
               .json({ message: "User disLike 0, user a annulé son dislike!" })
           )
           .catch((error) => res.status(400).json({ error }));
-      } else {
-        console.log("DISLIKE != 0");
       }
     })
     .catch((error) => res.status(404).json({ error }));

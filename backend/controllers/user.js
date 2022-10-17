@@ -11,11 +11,11 @@ exports.signup = (req, res, next) => {
   console.log(req.body);
 
   // It should be 4 characters, 1 lowercase, 1 uppercase, 1 numeric, 1 special character
-  let regExEmail = new RegExp(
-    /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/
-  );
   let regExPassword = new RegExp(
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{4}$/
+  );
+  let regExEmail = new RegExp(
+    /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/
   );
 
   let testEmail = regExEmail.test(req.body.email);

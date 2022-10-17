@@ -1,14 +1,10 @@
 const express = require("express");
-// mongoose pour créer une interface avec bdd MongoDB c'est créer un schéma qui nous permettre d'enregistrer, de lire, de modifier les objets.
 const mongoose = require("mongoose");
-
 const bodyParser = require("body-parser");
-// ***
 const path = require("path");
 
 require("dotenv").config({ path: "./vars/.env" });
 
-// 👽 importer ./routes/user.js, ./routes/sauces.js, go to down to save routes
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauces");
 
