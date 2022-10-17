@@ -1,7 +1,7 @@
 
 ## Project 6 | OpenClassrooms | Construisez une API sécurisée pour une application d'avis gastronomiques
 
-## :pushpin: The Purpose of the Project
+## ✴️: The Purpose of the Project
 
 1. Creating a logical data model and translating it into the API 
 2. Ipmlementing CRUD fonctionalty, Create, Read, Update, and Delete
@@ -9,11 +9,11 @@
 4. Protecting data stored on an app (OWASP/RGPD)
 5. Creating a user, verifying and securing the user's session
 
-## :pushpin: The Technologies used
+## :✴️: The Technologies used
 
-✏️Node.js ✏️Express ✏️MongoDB ✏️API REST 
+✳️ Node.js ✳️ Express ✳️ MongoDB ✳️ API REST 
 
-## :pushpin: Project Backend Setup
+## :✴️: Project Backend Setup
 
 1. Open a terminal at the root of the project
 
@@ -45,7 +45,7 @@ JWT_KEY_TOKEN="Create an API token"
 ```
 npm start
 ```
-## :pushpin: Project Frontend Setup
+## :✴️: Project Frontend Setup
 
 1. Open a terminal at the root of the project
 
@@ -69,7 +69,7 @@ npm run start
 
 👉 http://localhost:4200/
 
-## :pushpin: Password Validation
+## :✴️: Password Validation
 
 Password must be 6 characters: 
 
