@@ -2,8 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
-
+// security
 require("dotenv").config({ path: "./vars/.env" });
+const mongoSanitize = require("express-mongo-sanitize");
+const hpp = require("hpp");
+const morgan = require("morgan");
 
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauces");
@@ -16,8 +19,8 @@ mongoose
       useUnifiedTopology: true,
     }
   )
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+  .then(() => console.log("✅ Connexion à MongoDB réussie !"))
+  .catch(() => console.log("⛔️ Connexion à MongoDB échouée !"));
 
 console.log(process.env.DB_USERNAME);
 
@@ -40,6 +43,15 @@ app.use((req, res, next) => {
 
 // transformer le corps, body, en JSON objet JS
 app.use(bodyParser.json());
+
+// security
+
+// Mongo sanitize to sanitizes inputs against query selector injection attacks
+app.use(mongoSanitize());
+// HPP middleware to protect against HTTP parameter pollution attacks
+app.use(hpp());
+// Morgan middleware to create logs
+app.use(morgan("combined"));
 
 // Afin d'enregistrer les routes ici, on ajoute app.use(), ce la route attendu par le frontend
 // Ca sera la racine de tout ce qui est route liéee a l'authentification
