@@ -12,7 +12,7 @@ exports.signup = (req, res, next) => {
 
   // It should be 4 characters, 1 lowercase, 1 uppercase, 1 numeric, 1 special character
   let regExPassword = new RegExp(
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{4}$/
+    /^(?=.*?[A-Z]){1}(?=.*?[a-z]){1}(?=.*?[0-9]){3}(?=.*?[^\w\s]){1}.{6}$/
   );
   let regExEmail = new RegExp(
     /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/
