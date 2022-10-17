@@ -6,7 +6,7 @@
 1. Creating back-end of this project to build an API (The front-end of the application was developed using Angular)
 2. Creating a logical data model and translating it into the API 
 3. Ipmlementing CRUD fonctionalty, Create, Read, Update, and Delete
-4. Storing data in a database, I choosed mongoDB
+4. Storing data in the database mongoDB
 5. Protecting data stored on an app (OWASP/RGPD)
 6. Creating a user, verifying and securing the user's session
 
