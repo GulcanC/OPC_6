@@ -21,6 +21,15 @@ exports.signup = (req, res, next) => {
   let testEmail = regExEmail.test(req.body.email);
   let testPassword = regExPassword.test(req.body.password);
 
+  if (testEmail === false) {
+    res.status(401).json({ mesage: "⛔️ Email is not correct!" });
+  }
+  if (testPassword === false) {
+    res.status(401).json({
+      mesage:
+        "⛔️ Le mot de passe doit contenir 1 lettre majuscule, 1 lettre minuscule, 1 caractère spécial et 3 chiffres !",
+    });
+  }
   if (testEmail && testPassword === true) {
     // 2 hasher le mot de passe
     // 4 appeler la fonction bcrypte.hash() pour crypte le mot de passe
@@ -42,9 +51,9 @@ exports.signup = (req, res, next) => {
           .then(() =>
             res
               .status(201)
-              .json({ message: "Utilisateur créé et sauvegardée!" })
+              .json({ message: "✅ Utilisateur créé et sauvegardée!" })
           )
-          .catch(() => res.status(400).json({ error }));
+          .catch((error) => res.status(400).json({ error }));
       })
 
       .catch((error) => res.status(500).json({ error }));
@@ -62,9 +71,7 @@ exports.login = (req, res, next) => {
     .then((user) => {
       // 4 si la valeur est null, l'utilisateur n'existait pas dans notre bdd
       if (user === null) {
-        res
-          .status(401)
-          .json({ mesage: "Paire identifiant/mot de passe incorrecte!" });
+        res.status(401).json({ mesage: "⛔️ Utilisateur non trouvé!" });
       }
       // 5 si nous avons une valeur, on compare le mot de passe de la bdd avec le mot de passe qui nous a été transmis
       else {
@@ -76,7 +83,7 @@ exports.login = (req, res, next) => {
             if (!valid) {
               res
                 .status(401)
-                .json({ message: "Paire login/mot de passe incorrecte" });
+                .json({ message: "⛔️ Le mot de passe est incorrecte!" });
             } else {
               // 8 si le mot de passe est correct nous avons le userId et le token
               // 9 on installe un package jsonwebtoken qui nous permete de créer des token et de les veérifier
