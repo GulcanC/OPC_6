@@ -27,9 +27,8 @@ cd backend
 ```
 npm install
 ```
-4. Create a "images" folder in the "backend" folder (whose name must be "images")
-5. Create a project in mongoDB, specify a user with a specific username and password, and create a cluster
-6. Create a file .env likes the file .env.example and write the following informations using your own data in this file
+4. Create a project in mongoDB, specify a user with a specific username and password, and create a cluster
+5. Create a file .env likes the file .env.example and write the following informations using your own data in this file
 
 ```
 PORT=3000
@@ -59,7 +58,7 @@ cd frontend
 ```
 npm install
 ```
-4. Run backend server with this command
+4. Run frontend server with this command
 
 ```
 npm run start
