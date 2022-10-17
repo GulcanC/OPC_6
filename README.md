@@ -3,11 +3,12 @@
 
 ## ✴️ The Purpose of the Project
 
-1. Creating a logical data model and translating it into the API 
-2. Ipmlementing CRUD fonctionalty, Create, Read, Update, and Delete
-3. Storing data in a database, I choosed mongoDB
-4. Protecting data stored on an app (OWASP/RGPD)
-5. Creating a user, verifying and securing the user's session
+1. Creating back-end of this project to build an API (The front-end of the application was developed using Angular)
+2. Creating a logical data model and translating it into the API 
+3. Ipmlementing CRUD fonctionalty, Create, Read, Update, and Delete
+4. Storing data in a database, I choosed mongoDB
+5. Protecting data stored on an app (OWASP/RGPD)
+6. Creating a user, verifying and securing the user's session
 
 ## ✴️ The Technologies used
 
