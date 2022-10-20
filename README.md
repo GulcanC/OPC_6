@@ -10,6 +10,10 @@
 5. Protecting data stored on an app (OWASP/RGPD)
 6. Creating a user, verifying and securing the user's session
 
+## ✴️ About the Project
+
+In this project, we can create a user using a password and email address. This user can like, dislike or unlike the sauces created by other users, but cannot make any changes or delete these sauces. Users can create their own sauces and only delete or modify their own sauce. The user can log out and reconnect using her/his password and email address.
+
 ## ✴️ The Technologies used
 
 ✳️ Node.js ✳️ Express ✳️ MongoDB ✳️ API REST 
