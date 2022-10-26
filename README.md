@@ -33,7 +33,7 @@ cd backend
 npm install
 ```
 4. Create a project in mongoDB, specify a user with a specific username and password, and create a cluster
-5. Create a folder with name of "vars" in the repositoery "backend", inside "vars" create a file ".env" likes the file .env.example and write the following informations using your own data in this file. [backend/vars/.env]
+5. Create a folder with name of "vars" in the repository "backend", inside "vars" create a file ".env" likes the file .env.example and write the following informations using your own data in this file. [backend/vars/.env]
 
 ```
 PORT=3000
