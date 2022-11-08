@@ -12,7 +12,7 @@
 
 ## ✴️ About the Project
 
-https://www.youtube.com/watch?v=rM21HN7NaPQ
+https://www.youtube.com/watch?v=ISGOk1S7ecE
 
 In this project, we can create a user using a password and email address. This user can like, dislike or unlike the sauces created by other users, but cannot make any changes or delete these sauces. Users can create their own sauces and only delete or modify their own sauce. The user can log out and reconnect using her/his password and email address.
 
