@@ -77,8 +77,8 @@ npm run start
 
 Password must be 6 characters: 
 
-:pencil: 1 uppercase letter
-:pencil: 1 lowercase letter
-:pencil: 1 special character
-:pencil: 3 digits
+:star: 1 uppercase letter
+:star: 1 lowercase letter
+:star: 1 special character
+:star: 3 digits
 
